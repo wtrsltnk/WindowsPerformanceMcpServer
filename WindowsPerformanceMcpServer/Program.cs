@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using SampleMcpServer;
 using SampleMcpServer.Tools;
 using System;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -14,7 +13,7 @@ string webEndpoint = "http://localhost:3001";
 const string HttpEndpointSwitch = "--http-endpoint=";
 
 var config = new ConfigurationBuilder()
-    .SetBasePath(Assembly.GetExecutingAssembly().Location)
+    .SetBasePath(AppContext.BaseDirectory)
     .AddJsonFile("appsettings.json", optional: true)
     .AddUserSecrets(Assembly.GetExecutingAssembly())
     .Build();
