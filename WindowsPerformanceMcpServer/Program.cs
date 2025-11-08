@@ -14,7 +14,7 @@ string webEndpoint = "http://localhost:3001";
 const string HttpEndpointSwitch = "--http-endpoint=";
 
 var config = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
+    .SetBasePath(Assembly.GetExecutingAssembly().Location)
     .AddJsonFile("appsettings.json", optional: true)
     .AddUserSecrets(Assembly.GetExecutingAssembly())
     .Build();
