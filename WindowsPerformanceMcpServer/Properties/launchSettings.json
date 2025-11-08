@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SampleMcpServer": {
+      "commandName": "Project",
+      "commandLineArgs": "--not-streaming-http"
+    }
+  }
+}
