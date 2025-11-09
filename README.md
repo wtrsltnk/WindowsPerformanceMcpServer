@@ -1,1 +1,5 @@
-# WindowsPerformanceMcpServer
+# Windows Performance Mcp Server
+
+```json
+{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"get_cpu_usage","arguments":{}}}
+```

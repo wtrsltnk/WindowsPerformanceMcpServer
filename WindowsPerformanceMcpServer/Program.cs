@@ -8,6 +8,7 @@ using SampleMcpServer.Tools;
 using System;
 using System.Linq;
 using System.Reflection;
+using WindowsPerformanceMcpServer.Tools;
 
 string webEndpoint = "http://localhost:3001";
 const string HttpEndpointSwitch = "--http-endpoint=";
@@ -30,7 +31,11 @@ if (isWeb)
         webEndpoint = httpEndpoint?.ToString() ?? "http://localhost:3001";
     }
 
-    Console.WriteLine($"Opening the MCP server as web-app @ {webEndpoint}");
+    Console.Write("Opening the MCP server as web-app @ ");
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
+    Console.Write(webEndpoint);
+    Console.ResetColor();
+
     builder = WebApplication.CreateBuilder(args);
 }
 else
@@ -38,6 +43,8 @@ else
     builder = Host.CreateApplicationBuilder(args);
     builder.Logging.ClearProviders();
 }
+
+builder.Services.AddSingleton<IPerformanceCounterService>(new PerformanceCounterService());
 
 builder.Services.Configure<AppSettings>(config);
 var appSettings = config
@@ -47,10 +54,6 @@ var appSettings = config
 builder.Services
     .AddSingleton<IAppSettings>(appSettings);
 
-builder.Services
-    .AddHttpClient();
-
-// Add the MCP services: the transport to use (stdio) and the tools to register.
 var mcpServerBuilder = builder.Services
     .AddMcpServer();
 
